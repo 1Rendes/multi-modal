@@ -5,30 +5,22 @@ const modals = document.querySelectorAll([
   "[data-third-modal]",
 ]);
 
+const btnNames = ["first-btn", "second-btn", "third-btn"];
+
 function modalToogler(event) {
   const element = event.target.classList;
-  switch (element[0]) {
-    case "first-btn":
-      modals[0].classList.remove("is-hidden");
-      return;
-    case "second-btn":
-      modals[1].classList.remove("is-hidden");
-      return;
-    case "third-btn":
-      modals[2].classList.remove("is-hidden");
-      return;
-    case "backdrop":
-      modals[0].classList.add("is-hidden");
-      modals[1].classList.add("is-hidden");
-      modals[2].classList.add("is-hidden");
-      return;
-    case "btn-close":
-      modals[0].classList.add("is-hidden");
-      modals[1].classList.add("is-hidden");
-      modals[2].classList.add("is-hidden");
-      return;
-    default:
-      return;
+  const openModals = document.querySelectorAll(".backdrop");
+  for (let i = 0; i < modals.length; i++) {
+    if (element.contains(btnNames[i])) {
+      modals[i].classList.remove("is-hidden");
+    }
+  }
+  if (element.contains("backdrop") || element.contains("btn-close")) {
+    openModals.forEach((element) => {
+      if (!element.classList.contains("is-hidden")) {
+        element.classList.add("is-hidden");
+      }
+    });
   }
 }
 
